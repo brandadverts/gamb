@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="11 11 178 178" role="img" aria-label="Gamb Gaming">
+  <title>Gamb Gaming</title>
+  <defs>
+    <linearGradient id="goldBevel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3e3bb"/>
+      <stop offset="42%" stop-color="#d9bd84"/>
+      <stop offset="100%" stop-color="#9c7a45"/>
+    </linearGradient>
+    <linearGradient id="goldBevelRev" x1="100%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#f3e3bb"/>
+      <stop offset="42%" stop-color="#d9bd84"/>
+      <stop offset="100%" stop-color="#9c7a45"/>
+    </linearGradient>
+  </defs>
+  <path d="M112,95 L112,44 Q112,20 88,20 L44,20 Q20,20 20,44 L20,88 Q20,112 44,112 L70,112"
+        fill="none" stroke="url(#goldBevel)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M88,105 L88,156 Q88,180 112,180 L156,180 Q180,180 180,156 L180,112 Q180,88 156,88 L130,88"
+        fill="none" stroke="url(#goldBevelRev)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
