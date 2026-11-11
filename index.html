@@ -1,47 +1,17 @@
 <!doctype html>
-<html lang="tr">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Gamb Gaming</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rye&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="deck.css" />
-</head>
-<body data-suit="spades">
-  <div class="deck-app">
-    <div class="bg-watermark"><img src="assets/mark.svg" alt="" /></div>
-
-    <div class="brand-corner">
-      <img src="assets/mark.svg" alt="" />
-      <span>GAMB <em>GAMING</em></span>
-    </div>
-
-    <main class="deck-stage">
-      <div class="card-row" id="cardRow"></div>
-      <button class="deck-arrow up" aria-label="Önceki kart">➜</button>
-      <button class="deck-arrow down" aria-label="Sonraki kart">➜</button>
-      <button class="tap-zone tap-prev" aria-label="Önceki karta dokun"></button>
-      <button class="tap-zone tap-next" aria-label="Sonraki karta dokun"></button>
-      <div class="deck-hint">▼ kaydırın veya kartı sürükleyip atın</div>
-    </main>
-    <div class="fx-layer" id="fxLayer"></div>
-
-    <button class="deck-menu-launcher" aria-label="Deste menüsü">
-      <span class="launcher-dot">♠</span> Desteler
-    </button>
-    <div class="deck-menu-panel">
-      <button class="deck-menu-item" data-section="spades"><span class="mi-suit">♠</span> Platform</button>
-      <button class="deck-menu-item" data-section="hearts"><span class="mi-suit">♥</span> Neden Biz</button>
-      <button class="deck-menu-item" data-section="diamonds"><span class="mi-suit">♦</span> Teknoloji</button>
-      <button class="deck-menu-item" data-section="clubs"><span class="mi-suit">♣</span> Sonuçlar</button>
-      <div class="deck-menu-progress">Kart <b id="cardIdx">1</b> / 52</div>
-      <div class="deck-progress-track"><div class="deck-progress-fill" id="progressFill"></div></div>
-    </div>
-
-    <button class="sticky-cta">İletişime Geç</button>
-  </div>
-  <script src="deck.js" defer></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gamb Gaming</title>
+    <meta name="description" content="Explore Gamb Gaming’s sportsbook and casino infrastructure, technology, and operator solutions, then book a demo for a turnkey iGaming platform.">
+    <link rel="icon" href="favicon.png">
+    <meta property="og:title" content="Gamb Gaming">
+    <meta property="og:description" content="Explore Gamb Gaming’s sportsbook and casino infrastructure, technology, and operator solutions, then book a demo for a turnkey iGaming platform.">
+    <script type="module" crossorigin src="assets/index.js"></script>
+    <link rel="stylesheet" crossorigin href="assets/index.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
