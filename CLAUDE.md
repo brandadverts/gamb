@@ -1,6 +1,6 @@
 # Gamb Gaming — kurumsal B2B tanıtım sitesi
 
-Canlı adres: https://brandadverts.github.io/gamb-gaming/ (GitHub Pages, `main` dalı kökü, her push'ta otomatik yayın).
+Canlı adres: https://brandadverts.github.io/gamb/ (GitHub Pages, repo `brandadverts/gamb`, `main` dalı kökü, her push'ta otomatik yayın; eski ad `gamb-gaming` 2026-11-11'de `gamb` olarak değiştirildi).
 
 ## Bu repo nedir
 "Wild West Gaming Platform" adlı Figma Make tasarımının (kaynak: https://scene-bright-41964175.figma.site/)
@@ -15,7 +15,6 @@ Dosyalar:
 - `assets/index.css` — Make çıktısı + sonda `/* --- Gamb Gaming overrides --- */`, `/* --- Responsive pass 2 --- */`, `/* --- Pass 3 ... --- */` blokları (Tailwind arbitrary sınıfları `\[`, `\,`, `\.` ile kaçırılır).
 - `assets/mark.svg` — altın marka işareti; bundle'daki tüm `GG` yazı logoları buna yamalandı (`img.gg-logo-img`).
 - `assets/giphy/*.mp4` (Giphy, giphy.mp4 varyantı), `assets/video/*.mp4` (Pexels, ücretsiz ticari lisans), `assets/img/*.jpg` (western/slider fotoğrafları + gerçek LuckyLira ekranları `screen-*.jpg`).
-- `deck.js`, `deck.css`, `img/`, `video/`, `assets/images/` — ESKİ el yapımı deste; kullanılmıyor, silinecek.
 
 ## Bundle'da bilinmesi gereken yerler
 - Kart metinleri: `te={1:[eyebrow,title,desc,b1,b2,b3],...,51:[...]}`; 0 = kapak, 52 = demo formu (`mailto:info@gambgaming.com`). Krallar 13/26/39 (bullet'ları boş).
