@@ -106,3 +106,13 @@ canvas.gg-fx{display:block;background:#050c08}
 /* --- Pass 8: arka plan logo filigrani "saydam/kirli" gorunuyordu — kullanici
    zeminin tek duz koyu renk olmasini istedi, filigrani kaldir --- */
 .gg-wm{display:none!important}
+/* --- Pass 9: kullanici gradyan degil DUZ/SOLID tek renk istedi (degrade
+   bazi ekran/tarayicilarda bantlanma/desen gibi gorunebiliyor). Yigindaki
+   (arkadaki) kartlar daha ONCEDEN var olan, Pass 6'dan DAHA OZGUL iki kural
+   yuzunden hicbir .gg-leather fix'ini hic almamisti — ozgulluklerini
+   esitleyip ayni kuralda eziyoruz --- */
+.gg-leather,
+article .gg-leather,
+.gg-leather.flex.h-full.items-center.justify-center,
+article .gg-leather.flex.h-full.items-center.justify-center
+{background:#0e271c!important}
