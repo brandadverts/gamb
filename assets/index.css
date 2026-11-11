@@ -62,3 +62,18 @@ form.gg-leather.gg-noscroll::-webkit-scrollbar-track{background:transparent}
   form.gg-leather textarea{height:44px;min-height:44px;padding-top:6px;padding-bottom:6px}
   form.gg-leather button.py-3{padding-top:9px;padding-bottom:9px}
 }
+/* --- Pass 3: dil seçici, sağ üst logo, koyu yeşil kart arkaları --- */
+#ggLogo{position:fixed;top:14px;right:16px;z-index:70;display:block;height:30px;line-height:0;opacity:.95;transition:opacity .2s}
+#ggLogo:hover{opacity:1}
+#ggLogo img{height:30px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+#ggLang{position:fixed;top:52px;right:16px;z-index:70;display:flex;align-items:center;gap:6px;font-family:"Special Elite",monospace;font-size:10px;letter-spacing:.18em;color:rgba(240,234,216,.55)}
+#ggLang button{background:none;border:0;padding:2px 2px;color:inherit;font:inherit;cursor:pointer;text-transform:uppercase}
+#ggLang button.is-on{color:#F0EAD8;text-decoration:underline;text-underline-offset:3px}
+#ggLang button:hover{color:#F0EAD8}
+.fixed.right-4.top-\[52px\]{top:78px}
+@media (max-width:767px){#ggLogo{top:12px;right:14px;height:26px}#ggLogo img{height:26px}#ggLang{top:48px;right:14px}}
+.gg-back,article .gg-leather.gg-back{background:radial-gradient(at 50% 0,#0d241b,#081712 70%)!important}
+.gg-back .gg-logo-img{opacity:.9}
+/* yığındaki arka kartlar (öndeki kartın .gg-leather'ı flex/items-center değildir) */
+article .gg-leather.flex.h-full.items-center.justify-center{background:radial-gradient(at 50% 0,#0d241b,#081712 70%)!important}
+@media (max-width:767px){#ggLang{top:17px;right:52px}}

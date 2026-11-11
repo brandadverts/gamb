@@ -5,41 +5,39 @@ Canlı adres: https://brandadverts.github.io/gamb-gaming/ (GitHub Pages, `main` 
 ## Bu repo nedir
 "Wild West Gaming Platform" adlı Figma Make tasarımının (kaynak: https://scene-bright-41964175.figma.site/)
 **derlenmiş** React bundle'ı + sonradan eklenen yamalar. Kaynak kod (TSX) bu repoda YOK; düzenlemeler
-`assets/index.js` üzerinde birebir string değişimi ve `assets/index.css` sonuna eklenen CSS override'larıyla yapılır.
+bundle üzerinde birebir string değişimi ve `assets/index.css` sonuna eklenen CSS override'larıyla yapılır.
 Köklü tasarım değişikliği gerekirse en sağlıklı yol: Figma Make'te "Remix" ile kaynağı dışa aktarıp yeniden derlemek.
 
 Dosyalar:
-- `index.html` — tek sayfa; `assets/index.js` (React, jsxDEV build, ~460 KB) ve `assets/index.css` (Tailwind v4 çıktısı) yükler.
-- `assets/index.css` — Make çıktısı + sonda `/* --- Gamb Gaming overrides --- */` ve `/* --- Responsive pass 2 --- */` blokları (bizim eklerimiz; Tailwind arbitrary sınıfları `\[`, `\,`, `\.` ile kaçırılır).
-- `assets/mark.svg` — altın marka işareti. Bundle'daki tüm `GG` yazı logoları (`children:\`GG\``) bu görsele yamalandı (`img.gg-logo-img`).
-- `assets/giphy/*.mp4` — Giphy klipleri (giphy.mp4 varyantı), `assets/video/*.mp4` — Pexels (ücretsiz ticari lisans), `assets/img/*.jpg` — western/slider fotoğrafları ve gerçek LuckyLira platform ekranları (`screen-*.jpg`).
-- `deck.js`, `deck.css`, `img/`, `video/` — ESKİ el yapımı deste; artık kullanılmıyor, silinecek (silme işlemi onay gerektirdiği için kaldı).
+- `index.html` — tek sayfa. Dil seçimi burada: `?lang=tr|en` > `localStorage.gg-lang` > `navigator.language`; TR ise `assets/index.tr.js`, değilse `assets/index.js` (EN) yüklenir. Ayrıca sağ üst logo (`#ggLogo`, tıklanınca kapak), TR/EN seçici (`#ggLang`), bölüm değişimi titreşimi (`window.__ggHaptic`, desen 40-50-40-50-180 ms; iOS Safari titreşim API'sini desteklemez, Android'de çalışır) ve videoları oynatmayı garantileyen MutationObserver.
+- `assets/index.js` — EN bundle (Make çıktısı + ortak yamalar). `assets/index.tr.js` — TR bundle (aynı yamalar + Türkçe metinler).
+- `build_i18n.py` — EN bundle'dan TR bundle'ı üretir ve ortak yamaları uygular (idempotent). Türkçe kart metinleri `TE_TR`, arayüz metinleri `UI` listesinde. Metin değiştirmek için bu dosyayı düzenleyip `python3 build_i18n.py && node --check assets/index.js && node --check assets/index.tr.js` çalıştır.
+- `assets/index.css` — Make çıktısı + sonda `/* --- Gamb Gaming overrides --- */`, `/* --- Responsive pass 2 --- */`, `/* --- Pass 3 ... --- */` blokları (Tailwind arbitrary sınıfları `\[`, `\,`, `\.` ile kaçırılır).
+- `assets/mark.svg` — altın marka işareti; bundle'daki tüm `GG` yazı logoları buna yamalandı (`img.gg-logo-img`).
+- `assets/giphy/*.mp4` (Giphy, giphy.mp4 varyantı), `assets/video/*.mp4` (Pexels, ücretsiz ticari lisans), `assets/img/*.jpg` (western/slider fotoğrafları + gerçek LuckyLira ekranları `screen-*.jpg`).
+- `deck.js`, `deck.css`, `img/`, `video/`, `assets/images/` — ESKİ el yapımı deste; kullanılmıyor, silinecek.
 
-## Bundle'da bilinmesi gereken yerler (assets/index.js)
-- Kart metinleri: `te={1:[eyebrow,title,desc,bullet1,bullet2,bullet3],...,51:[...]}`; 0 = kapak, 52 = demo formu (`mailto:sales@gambgaming.com`).
-- Suit temaları: `y={spade:{bg,accent,...,label:"Platform",start:1},club:...Tech(14),heart:...Why Us(27),diamond:...Solutions(40)}`.
-- Kart→medya haritası: `de={2:\`assets/img/screen-sports.jpg\`,5:\`assets/giphy/CFaGnXWf6GABHKKZcC.mp4\`,...}` ve `fe=e=>e`. `.mp4` uzantılı değerler `<video muted autoplay loop playsinline>`, diğerleri `<img>` olarak render edilir (`Me` bileşeni yaması). `screen-` içeren görsellere sepia filtresi uygulanmaz.
-- Yama yöntemi: Python ile `js.count(old)==beklenen` assert'i, sonra `replace`. Bir satırı değiştirmeden önce mutlaka say.
-- Kart geçiş animasyonları (rulet, aviator, slot 777, blackjack 21, poker, para yağmuru) ve swipe/wheel/klavye gezinmesi Make çıktısında hazır.
+## Bundle'da bilinmesi gereken yerler
+- Kart metinleri: `te={1:[eyebrow,title,desc,b1,b2,b3],...,51:[...]}`; 0 = kapak, 52 = demo formu (`mailto:info@gambgaming.com`). Krallar 13/26/39 (bullet'ları boş).
+- Suit temaları: `y={spade:{...label,start:1},club:...(14),heart:...(27),diamond:...(40)}`.
+- Kart→medya haritası `de={...}` (48 kart; krallar hariç hepsi) ve `fe=e=>e`. `.mp4` → `<video muted autoplay loop playsinline>`, diğerleri `<img>` (`Me` bileşeni yaması); `screen-` görsellerine sepia uygulanmaz.
+- Dokunma: yatay VE dikey kaydırma (yukarı → sonraki, aşağı → önceki; form kartında kapalı). Tekerlek ve ok tuşları Make çıktısında hazır.
+- `m(...)` gezinme fonksiyonunda `window.__ggHaptic(eski,yeni)` çağrısı var; overlay titreşimi (`ye`) kapatıldı. React dev build StrictMode yüzünden güncelleyici iki kez çalışır — haptik 400 ms içinde tekrarı yoksayar.
+- Yama yöntemi: Python ile `js.count(old)==beklenen` assert'i, sonra `replace`.
 
 ## Yerel çalıştırma ve test
 ```bash
-python3 -m http.server 8744   # repo kökünde; http://localhost:8744/
+python3 -m http.server 8744   # repo kökünde; http://localhost:8744/?lang=tr
 ```
-Tarayıcı otomasyonunda kart geçişi için `document.body.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}))`;
-öndeki kart = en yüksek z-index'li `article` (100; arkadakiler 99/98). Son ölçümlü denetim: 1280×720, 1920×1080, 768×1024, 375×812, 360×640 — tüm kartlarda kırpma/bindirme yok.
+Tarayıcı otomasyonunda kart geçişi: `document.body.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}))`;
+öndeki kart = en yüksek z-index'li `article` (100; arkadakiler 99/98, inline style). Ölçümlü denetim 1280×720, 1920×1080, 768×1024, 375×812, 360×640'ta yapıldı.
 
-## Müşteri brief'i (2026-11-09/10 sohbeti) — durum
-Karşılandı: 52 kartlık deste, kapakta logo ✓ · suit'e göre renk şeması değişimi ✓ · yan menü → bölüm ✓ · oyun kartı formu, köşe sembolleri, arka planda şeffaf suit ✓ · çapraz kesik görsel şeridi ✓ · geçiş animasyonları (rulet/aviator/slot/blackjack/poker/bonus) ✓ · elle kaydırma + scroll + klavye ✓ · mobil tam ekran ✓ · sabit "Contact us" → kart 52 demo formu ✓ · ajans dilinde satış metni ✓ · gerçek platform ekranları + video + Giphy ✓ · logo altın marka işareti (kapak, filigran, kart arkaları) ✓.
+## Müşteri brief'i — durum
+Karşılandı: 52 kartlık deste, kapakta logo · suit'e göre renk şeması · yan menü → bölüm · oyun kartı formu, köşe sembolleri, şeffaf suit · çapraz kesik görsel şeridi · geçiş animasyonları · kaydırma + scroll + klavye (dikey kaydırma dahil) · mobil tam ekran · sabit "İletişime geçin" → demo formu · ajans dilinde satış metni · her kartta gerçek görsel/GIF/video · altın logo (kapak, filigran, kart arkaları, sağ üst) · kart arkaları koyu yeşil · TR/EN tarayıcı diline göre · bölüm değişiminde titreşim · e-posta info@gambgaming.com.
 
-Açık kalanlar (Make tasarımı farklı çözdüğü için dokunulmadı; müşteri isterse yapılacak):
-1. Masaüstünde 3–4 kart yan yana ekranı kaplasın (şu an tek kart + arkada iki kart). Bundle'da mümkün değil → Make'te Remix veya yeniden yazım.
-2. Logo sağ üstte olsun (şu an sol rayda; mobilde üstte logo yok).
-3. Kart arkaları koyu yeşil olsun (şu an deri/altın).
-4. İçerik Türkçe (şu an tamamen İngilizce; `te` haritası çevrilerek yapılabilir).
-5. İletişim e-postası: Make `sales@gambgaming.com`, eski deste `iletisim@gambgaming.com` — hangisi doğru, müşteriye sor.
+Açık: masaüstünde 3–4 kart yan yana (Make tasarımı tek kart + arkada iki kart; bundle'da yapılamaz → Figma Make'te Remix). Müşteri TR/EN metinleri gözden geçirip değişiklik listesi verecek; o liste `build_i18n.py` içindeki `TE_TR`/`UI` üzerinden uygulanır (EN için `te` haritası doğrudan `assets/index.js`'te).
 
 ## Kurallar
-- Ünlü/film/dizi klipleri ve rakip kumarhane markalı GIF'ler kullanılmaz; Giphy'den seçerken illüstrasyon/soyut klipleri tercih et, `giphy.mp4` varyantını indir.
-- Varlık eklerken dosyayı ve ona referans veren kodu AYNI commit'te gönder (canlıda kırık görsel kalmasın).
+- Ünlü/film/dizi klipleri ve rakip kumarhane markalı GIF'ler kullanılmaz; Giphy'den illüstrasyon/soyut klipler, `giphy.mp4` varyantı.
+- Varlık ve ona referans veren kod AYNI commit'te.
 - Commit mesajları Türkçe, `git push origin main` ile yayın.

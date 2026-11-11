@@ -2,16 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Gamb Gaming</title>
     <meta name="description" content="Explore Gamb Gaming’s sportsbook and casino infrastructure, technology, and operator solutions, then book a demo for a turnkey iGaming platform.">
     <link rel="icon" href="favicon.png">
     <meta property="og:title" content="Gamb Gaming">
     <meta property="og:description" content="Explore Gamb Gaming’s sportsbook and casino infrastructure, technology, and operator solutions, then book a demo for a turnkey iGaming platform.">
-    <script type="module" crossorigin src="assets/index.js"></script>
     <link rel="stylesheet" crossorigin href="assets/index.css">
+    <script>
+    (function(){
+      var q=null,s=null;
+      try{q=new URLSearchParams(location.search).get('lang')}catch(e){}
+      try{s=localStorage.getItem('gg-lang')}catch(e){}
+      var l=(q||s||navigator.language||'en').toLowerCase().slice(0,2);
+      l=l==='tr'?'tr':'en';
+      if(q){try{localStorage.setItem('gg-lang',l)}catch(e){}}
+      document.documentElement.lang=l;window.__ggLang=l;
+      if(l==='tr'){var d=document.querySelector('meta[name=description]');if(d)d.content='Gamb Gaming’in spor bahis ve casino altyapısını, teknolojisini ve operatör çözümlerini keşfedin; anahtar teslim iGaming platformu için demo talep edin.';}
+      var sc=document.createElement('script');sc.type='module';sc.crossOrigin='';sc.src=l==='tr'?'assets/index.tr.js':'assets/index.js';document.head.appendChild(sc);
+      var lastH=0;
+      window.__ggHaptic=function(a,b){
+        var sec=function(i){return i===0?'c':i<=13?'s':i<=26?'k':i<=39?'h':'d'};
+        var now=Date.now();if(now-lastH<400)return;
+        if(sec(a)!==sec(b)&&'vibrate'in navigator){lastH=now;try{navigator.vibrate([40,50,40,50,180])}catch(e){}}
+      };
+      var kick=function(v){v.muted=true;v.playsInline=true;var p=function(){v.play().catch(function(){})};v.readyState>=2?p():v.addEventListener('loadeddata',p,{once:true});};
+      document.addEventListener('visibilitychange',function(){if(!document.hidden){document.querySelectorAll('video').forEach(kick)}});
+      new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==='VIDEO')kick(n);else if(n.querySelectorAll)n.querySelectorAll('video').forEach(kick);});});}).observe(document.documentElement,{childList:true,subtree:true});
+      document.addEventListener('DOMContentLoaded',function(){
+        var lg=document.getElementById('ggLogo');
+        lg&&lg.addEventListener('click',function(ev){ev.preventDefault();var b=document.querySelector('button[aria-label="Cover"],button[aria-label="Kapak"]');b?b.click():location.reload();});
+        var btns=document.querySelectorAll('#ggLang button');
+        for(var i=0;i<btns.length;i++){btns[i].addEventListener('click',function(){var v=this.getAttribute('data-l');try{localStorage.setItem('gg-lang',v)}catch(e){}var u=new URL(location.href);u.searchParams.set('lang',v);location.href=u.toString();});
+          if(btns[i].getAttribute('data-l')===l)btns[i].classList.add('is-on');}
+      });
+    })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <a id="ggLogo" href="#" aria-label="Gamb Gaming"><img src="assets/mark.svg" alt="" /></a>
+    <div id="ggLang" role="group" aria-label="Language"><button type="button" data-l="tr">TR</button><span>·</span><button type="button" data-l="en">EN</button></div>
   </body>
 </html>
