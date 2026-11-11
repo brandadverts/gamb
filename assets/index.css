@@ -102,3 +102,7 @@ canvas.gg-fx{display:block;background:#050c08}
 .w-\[clamp\(300px\,24vw\,380px\)\]{width:clamp(300px,24vw,380px)}
 .w-\[min\(72vw\,330px\)\]{width:min(72vw,330px)}
 .w-\[min\(92vw\,560px\)\]{width:min(92vw,560px)}
+
+/* --- Pass 8: arka plan logo filigrani "saydam/kirli" gorunuyordu — kullanici
+   zeminin tek duz koyu renk olmasini istedi, filigrani kaldir --- */
+.gg-wm{display:none!important}
