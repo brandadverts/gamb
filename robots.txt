@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://brandadverts.github.io/gamb/sitemap.xml
