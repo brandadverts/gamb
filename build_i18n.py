@@ -66,6 +66,46 @@ if m and "gg-back" not in m.group(1):
 else:
     print("WARN: stack back card className not matched; CSS fallback only")
 
+# aviator: uçak SVG'sinin burnu solda, offset-rotate auto ise +x yönüne bakıyordu -> 180° çevir
+js = rep(js, "offsetRotate:`auto`", "offsetRotate:`auto 180deg`", 1, "aviator nose")
+
+# rulet geçişi: çizim tekerlek yerine gerçek rulet videosu (daire maskesi içinde), top kaldırıldı
+s = js.find("(0,x.jsxDEV)(`div`,{className:`gg-wheel-spin absolute inset-0 rounded-full")
+if s > 0:
+    endmark = "lineNumber:15,columnNumber:9},this)"
+    e = js.find(endmark, s) + len(endmark)
+    js = js[:s] + ("(0,x.jsxDEV)(`div`,{className:`absolute inset-0 overflow-hidden rounded-full border-[6px] border-[#C8A94A] "
+                   "shadow-[0_0_60px_rgba(200,169,74,.5)] bg-black`,children:(0,x.jsxDEV)(`video`,{src:`assets/video/roulette-real.mp4`,"
+                   "autoPlay:!0,muted:!0,loop:!0,playsInline:!0,preload:`auto`,className:`h-full w-full object-cover`},void 0,!1,void 0,void 0)},"
+                   "void 0,!1,void 0,void 0)") + js[e:]
+    print("roulette wheel -> video")
+else:
+    assert "assets/video/roulette-real.mp4" in js, "roulette patch missing"
+    print("already applied: roulette video")
+js = rep(js, "(0,x.jsxDEV)(`div`,{className:`gg-ball absolute left-1/2 top-1/2 h-0 w-0`,children:(0,x.jsxDEV)(`i`,{className:`absolute -left-2 -top-2 h-4 w-4 rounded-full bg-white shadow-[0_0_8px_#fff]`},void 0,!1,{fileName:E,lineNumber:24,columnNumber:68},this)},void 0,!1,{fileName:E,lineNumber:24,columnNumber:9},this),",
+          "", 1, "roulette ball") if "gg-ball absolute" in js else js
+js = rep(js, "gg-wheel-drop relative h-[260px] w-[260px]", "gg-wheel-drop relative h-[min(72vw,330px)] w-[min(72vw,330px)]", 1, "wheel size")
+
+# silahşor geçiş sahnesi (yeni kind: gunslinger) — gerçek tabanca klibi + namlu alevi + BANG!
+GE = ("function Ge(){return(0,x.jsxDEV)(xe,{children:(0,x.jsxDEV)(`div`,{className:`gg-gun relative h-[min(60vw,320px)] w-[min(92vw,560px)] overflow-hidden rounded-2xl border-[4px] border-[#C8A94A] shadow-[0_0_60px_rgba(200,169,74,.5)] bg-black`,children:["
+      "(0,x.jsxDEV)(`video`,{src:`assets/video/revolver.mp4`,autoPlay:!0,muted:!0,playsInline:!0,preload:`auto`,className:`h-full w-full object-cover`},void 0,!1,void 0,void 0),"
+      "(0,x.jsxDEV)(`div`,{className:`gg-flash pointer-events-none absolute inset-0`},void 0,!1,void 0,void 0),"
+      "(0,x.jsxDEV)(`div`,{className:`gg-smoke pointer-events-none`},void 0,!1,void 0,void 0),"
+      "(0,x.jsxDEV)(`div`,{className:`gg-bang pointer-events-none absolute inset-0 flex items-center justify-center font-['Rye'] text-6xl text-[#FFB830]`,style:{textShadow:`0 0 40px rgba(255,184,48,.8), 0 4px 0 #6b5518`},children:`BANG!`},void 0,!1,void 0,void 0),"
+      "(0,x.jsxDEV)(`div`,{className:`absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap font-elite text-[12px] uppercase tracking-[0.3em] text-[#F0EAD8]/80`,children:`High Noon`},void 0,!1,void 0,void 0)"
+      "]},void 0,!0,void 0,void 0)},void 0,!1,void 0,void 0)}")
+if "function Ge()" not in js:
+    js = rep(js, "function O({kind:e}){return{roulette:(0,x.jsxDEV)(Se,",
+              GE + "function O({kind:e}){return{gunslinger:(0,x.jsxDEV)(Ge,{},void 0,!1,void 0,void 0),roulette:(0,x.jsxDEV)(Se,", 1, "overlay map")
+    js = rep(js, "ke=[`blackjack`,`counting`,`slots777`,`aviator`,`roulette`,`flush`,`slots`,`coins`]",
+              "ke=[`blackjack`,`counting`,`slots777`,`aviator`,`roulette`,`gunslinger`,`flush`,`slots`,`coins`]", 1, "kind cycle")
+    js = rep(js, "be={roulette:2e3,", "be={gunslinger:2300,roulette:2e3,", 1, "durations")
+    js = rep(js, "case`coins`:for(let e=0;e<16;e++)",
+              "case`gunslinger`:ge(.56,.05,.35,2800),ge(.6,.45,.16,420),he(64,.58,.5,`sine`,.16,24);break;case`coins`:for(let e=0;e<16;e++)", 1, "gunshot sound")
+    print("gunslinger overlay added")
+else:
+    print("already applied: gunslinger")
+
 EN = js
 
 # ---------- TR ----------
@@ -164,6 +204,7 @@ UI = [
     ("\"aria-label\":`Suits`", "\"aria-label\":`Bölümler`", 2), ("\"aria-label\":`Cover`", "\"aria-label\":`Kapak`", 1),
     ("`Need to talk to someone who gets it?`", "`İşin içinden biriyle konuşmak ister misiniz?`", 1), ("`Contact us`", "`İletişime geçin`", 1),
     ("`FREE GAMES START`", "`BEDAVA OYUNLAR BAŞLIYOR`", 1), ("`Running count`", "`Sayım`", 1),
+    ("children:`High Noon`", "children:`Düello Vakti`", 1),
 ]
 for old, new, exp in UI:
     n = tr.count(old)

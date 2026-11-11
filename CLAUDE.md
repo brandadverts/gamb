@@ -37,6 +37,13 @@ Karşılandı: 52 kartlık deste, kapakta logo · suit'e göre renk şeması · 
 
 Açık: masaüstünde 3–4 kart yan yana (Make tasarımı tek kart + arkada iki kart; bundle'da yapılamaz → Figma Make'te Remix). Müşteri TR/EN metinleri gözden geçirip değişiklik listesi verecek; o liste `build_i18n.py` içindeki `TE_TR`/`UI` üzerinden uygulanır (EN için `te` haritası doğrudan `assets/index.js`'te).
 
+## Geçiş sahneleri (overlay)
+- Döngü `ke=[blackjack,counting,slots777,aviator,roulette,gunslinger,flush,slots,coins]`; her 4. kartta sırayla tetiklenir (`n%4==0`). Süreler `be={...}`.
+- `aviator`: uçak SVG'sinin burnu solda olduğu için `offsetRotate: auto 180deg` (aksi halde ters uçar).
+- `roulette` (`Se`): çizim tekerlek yerine `assets/video/roulette-real.mp4` (Pexels 7607440, gerçek çekim) daire maskesinde; ortada logo, sonda "0" rozeti.
+- `gunslinger` (`Ge`): `assets/video/revolver.mp4` (Pexels 13618251) + CSS namlu alevi (`.gg-flash`), duman (`.gg-smoke`), geri tepme (`.gg-gun`), "BANG!" (`.gg-bang`), alt etiket High Noon / Düello Vakti; ses `ve()` switch'inde `case gunslinger` (noise + düşük sinüs).
+- Her iki video `index.html`'de gizli `<video preload="auto">` ile önceden yüklenir.
+
 ## Kurallar
 - Ünlü/film/dizi klipleri ve rakip kumarhane markalı GIF'ler kullanılmaz; Giphy'den illüstrasyon/soyut klipler, `giphy.mp4` varyantı.
 - Varlık ve ona referans veren kod AYNI commit'te.

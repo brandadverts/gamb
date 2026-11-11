@@ -77,3 +77,12 @@ form.gg-leather.gg-noscroll::-webkit-scrollbar-track{background:transparent}
 /* yığındaki arka kartlar (öndeki kartın .gg-leather'ı flex/items-center değildir) */
 article .gg-leather.flex.h-full.items-center.justify-center{background:radial-gradient(at 50% 0,#0d241b,#081712 70%)!important}
 @media (max-width:767px){#ggLang{top:17px;right:52px}}
+/* --- Pass 4: gerçek rulet videosu + silahşor geçiş sahnesi --- */
+.gg-flash{background:radial-gradient(circle at 60% 52%,rgba(255,244,210,.98),rgba(255,184,48,.7) 16%,rgba(255,120,20,.25) 32%,transparent 48%);opacity:0;animation:ggflash .5s ease-out .55s both}
+@keyframes ggflash{0%{opacity:0}12%{opacity:1}100%{opacity:0}}
+.gg-bang{opacity:0;animation:ggbang 1s cubic-bezier(.2,1.4,.4,1) .6s both}
+@keyframes ggbang{0%{opacity:0;transform:scale(.3) rotate(-8deg)}40%{opacity:1;transform:scale(1.12) rotate(2deg)}100%{opacity:1;transform:scale(1)}}
+.gg-gun{animation:ggrecoil .3s ease-out .58s both}
+@keyframes ggrecoil{0%{transform:none}35%{transform:translate(-7px,5px) rotate(-1.5deg)}100%{transform:none}}
+.gg-smoke{position:absolute;left:58%;top:46%;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(230,230,230,.55),rgba(200,200,200,0) 70%);opacity:0;animation:ggsmoke 1.4s ease-out .7s both}
+@keyframes ggsmoke{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}25%{opacity:.9}100%{opacity:0;transform:translate(-30%,-120%) scale(2.4)}}
