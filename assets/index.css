@@ -89,3 +89,5 @@ article .gg-leather.flex.h-full.items-center.justify-center{background:radial-gr
 /* --- Pass 5: mobil alt menü %50 saydam, Matrix canvas --- */
 nav.fixed.inset-x-0.bottom-0{background:rgba(0,0,0,.5)!important}
 canvas.gg-fx{display:block;background:#050c08}
+/* --- Pass 6: tüm kart yüzeyleri sabit koyu yeşil, saydamlık yok --- */
+.gg-leather,article .gg-leather{background:radial-gradient(at 50% 0,#0f2a1f,#081712 72%)!important}

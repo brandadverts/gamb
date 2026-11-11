@@ -73,6 +73,9 @@ if m and "gg-back" not in m.group(1):
 else:
     print("WARN: stack back card className not matched; CSS fallback only")
 
+# yığındaki arka kartlar saydam olmasın (her derinlikte %22 solma kaldırıldı; kaydırılıp giden kart yine 0)
+js = rep(js, "opacity:n<0&&!a?0:1-Math.abs(n)*.22,", "opacity:n<0&&!a?0:1,", 1, "stack opacity")
+
 # aviator: uçak SVG'sinin burnu solda, offset-rotate auto ise +x yönüne bakıyordu -> 180° çevir
 js = rep(js, "offsetRotate:`auto`", "offsetRotate:`auto 180deg`", 1, "aviator nose")
 
