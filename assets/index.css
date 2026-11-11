@@ -91,3 +91,14 @@ nav.fixed.inset-x-0.bottom-0{background:rgba(0,0,0,.5)!important}
 canvas.gg-fx{display:block;background:#050c08}
 /* --- Pass 6: tüm kart yüzeyleri sabit koyu yeşil, saydamlık yok --- */
 .gg-leather,article .gg-leather{background:radial-gradient(at 50% 0,#0f2a1f,#081712 72%)!important}
+
+/* --- Pass 7: JS icinde eklenen Tailwind keyfi-deger siniflari icin hic
+   uretilmemis CSS kurallari (rulet efekti .gg-wheel-drop 0x0 coktugu icin
+   hic gorunmuyordu) --- */
+.h-\[64px\]{height:64px}
+.h-\[clamp\(440px\,72vh\,620px\)\]{height:clamp(440px,72vh,620px)}
+.h-\[min\(60vw\,320px\)\]{height:min(60vw,320px)}
+.h-\[min\(72vw\,330px\)\]{height:min(72vw,330px)}
+.w-\[clamp\(300px\,24vw\,380px\)\]{width:clamp(300px,24vw,380px)}
+.w-\[min\(72vw\,330px\)\]{width:min(72vw,330px)}
+.w-\[min\(92vw\,560px\)\]{width:min(92vw,560px)}
