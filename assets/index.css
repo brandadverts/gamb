@@ -121,3 +121,19 @@ article .gg-leather.flex.h-full.items-center.justify-center
    sadece kaynakta TARANAN siniflari uretir; string-yama ile eklenen
    yeni bir sinifin CSS karsiligi olmuyor) --- */
 .mt-8{margin-top:calc(var(--spacing) * 8)!important}
+
+/* --- Pass 11: cover karti yazilari + sol-alt simge gridi buyutuldu;
+   Ne bileseninin Pass 10'da degistirilen clamp() degerleri icin de
+   HIC CSS kurali yoktu (ayni Tailwind-tarama hatasi, fark edilmemisti) --- */
+.text-\[clamp\(10px\,2vh\,13px\)\]{font-size:clamp(10px,2vh,13px)!important}
+.text-\[clamp\(12px\,2\.2vh\,15px\)\]{font-size:clamp(12px,2.2vh,15px)!important}
+.text-\[clamp\(15px\,2\.6vh\,19px\)\]{font-size:clamp(15px,2.6vh,19px)!important}
+.text-\[clamp\(13px\,2\.4vh\,16px\)\]{font-size:clamp(13px,2.4vh,16px)!important}
+.text-\[20px\]{font-size:20px!important}
+.text-\[clamp\(28px\,5\.4vh\,40px\)\]{font-size:clamp(28px,5.4vh,40px)!important}
+.text-\[clamp\(15px\,2\.8vh\,19px\)\]{font-size:clamp(15px,2.8vh,19px)!important}
+.text-\[clamp\(14px\,2\.3vh\,16\.5px\)\]{font-size:clamp(14px,2.3vh,16.5px)!important}
+.w-\[62px\]{width:62px!important}
+.gap-x-1\.5{column-gap:calc(var(--spacing) * 1.5)!important}
+
+.text-\[clamp\(11px\,1\.8vh\,13px\)\]{font-size:clamp(11px,1.8vh,13px)!important}
