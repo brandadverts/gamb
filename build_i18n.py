@@ -76,6 +76,9 @@ else:
 # yığındaki arka kartlar saydam olmasın (her derinlikte %22 solma kaldırıldı; kaydırılıp giden kart yine 0)
 js = rep(js, "opacity:n<0&&!a?0:1-Math.abs(n)*.22,", "opacity:n<0&&!a?0:1,", 1, "stack opacity")
 
+# bos madde ("") icin <li> uretilmesin: aksi halde yetim elmas isaretleri cikiyor (Papaz + showcase kartlari)
+js = rep(js, "children:e.bullets.map(e=>(0,x.jsxDEV)(`li`", "children:e.bullets.filter(Boolean).map(e=>(0,x.jsxDEV)(`li`", 1, "empty bullets")
+
 # aviator: uçak SVG'sinin burnu solda, offset-rotate auto ise +x yönüne bakıyordu -> 180° çevir
 js = rep(js, "offsetRotate:`auto`", "offsetRotate:`auto 180deg`", 1, "aviator nose")
 
