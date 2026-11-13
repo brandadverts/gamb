@@ -156,3 +156,20 @@ p.text-\[clamp\(13px\,2\.4vh\,16px\)\]{line-height:1.3!important}
 /* --- Pass 13: kapak odul satiri (EN "Reward: Unlimited Revenue") 390px genislikte iki satira kiriliyordu; harf araligi ve yan bosluk daraltildi, tek satira sigar --- */
 .tracking-\[0\.14em\]{--tw-tracking:.07em;letter-spacing:.07em!important}
 .px-4.py-\[clamp\(5px\,1vh\,8px\)\]{padding-inline:8px!important}
+
+/* --- Pass 14: icerik kartlarinda metin blogu tasiyordu (375x667'de 51 kartin 43'u, 390x844'te 3'u kesik). Metin blogu icerik yuksekligini esas alir, gorsel blogu once kuculur (min 64px); kisa ekranlarda yazi olcegi kademeli dusurulur --- */
+.z-\[1\].min-h-0.flex-1.flex-col.overflow-hidden{flex:1 1 auto!important;min-height:0!important}
+.flex-\[0_1_27\%\]{flex:0 999 27%!important}
+@media (max-height:720px){
+  .z-\[1\].flex-col.overflow-hidden>h2{font-size:clamp(24px,4.9vh,36px)!important}
+  .z-\[1\].flex-col.overflow-hidden>p.mt-3{font-size:clamp(14px,2.5vh,18px)!important;line-height:1.45!important}
+  .z-\[1\].flex-col.overflow-hidden li{font-size:clamp(13px,2.05vh,15.5px)!important}
+  .z-\[1\].flex-col.overflow-hidden>.mt-8{margin-top:12px!important}
+}
+@media (max-height:650px){
+  .z-\[1\].flex-col.overflow-hidden>h2{font-size:clamp(22px,4.5vh,32px)!important}
+  .z-\[1\].flex-col.overflow-hidden>p.mt-3{font-size:clamp(13px,2.3vh,16px)!important;line-height:1.4!important}
+  .z-\[1\].flex-col.overflow-hidden li{font-size:clamp(12.5px,1.95vh,14.5px)!important}
+  .z-\[1\].flex-col.overflow-hidden>ul{margin-top:8px!important}
+  .z-\[1\].flex-col.overflow-hidden>.mt-8{margin-top:8px!important}
+}
