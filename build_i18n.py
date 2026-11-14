@@ -20,14 +20,15 @@ js = rep(js, "sales@gambgaming.com", "info@gambgaming.com", 1, "email")
 
 G = lambda i: f"assets/giphy/{i}.mp4"
 media = {
-    1: G("11peb90FxNJqfK"), 2: "assets/img/screen-sports.jpg", 3: G("xT9DPi61MmrDLzVFzq"), 4: G("PhdC5X5qr6mzK"),
+    1: G("11peb90FxNJqfK"), 2: "assets/img/screen-sports.jpg", 3: G("xT9DPi61MmrDLzVFzq"), 4: "assets/video/slot-machine-play.mp4",
     5: G("CFaGnXWf6GABHKKZcC"), 6: "assets/img/casino-deposit.jpg", 7: "assets/video/slot-machine-play.mp4",
     8: G("3Hw6enl0Gz29DaiZaY"), 9: G("Vu5UbNpjpqfMq2UFg0"), 10: "assets/img/horse-race.jpg", 11: "assets/img/vip-gambler.jpg",
     12: "assets/img/screen-home.jpg", 14: G("CJxDzLxi9hngW7efbw"), 15: G("jZuKY2yJ2dj1OJfgoN"), 16: G("m7uHEe1Gse6fxmoX7E"),
     17: G("skqsmAzGjZZpS"), 18: G("l46CbPpL3szntVNhS"), 19: "fx:matrix", 20: G("jN9S0faVsUUfdaY50J"),
     21: G("ki1rmMhjvLlm"), 22: G("QpVUMRUJGokfqXyfa1"), 23: G("2i7jspnRBYgg6v4Oki"), 24: "assets/img/stadium.jpg",
     25: G("xUPGchZBY0Oh4qdGXm"), 27: G("lZTvTGEGKU6gnQ2wBr"), 28: G("Ce18KspdcaxaKuZ1HC"), 29: G("BfFFYPSVYr9UR6EtEL"),
-    30: G("SdMY3KVYI8mSVz7StH"), 31: G("lXiRm5H49zYmHr3i0"), 32: G("Pk9ux7yJBXKF9CIpg5"), 33: "assets/img/birthday.jpg",
+    30: "assets/img/screen-casino.jpg",  # TEMP: Gates of Olympus gorseli saglanana kadar yer tutucu
+    31: G("lXiRm5H49zYmHr3i0"), 32: G("Pk9ux7yJBXKF9CIpg5"), 33: "assets/img/birthday.jpg",
     34: G("qlotpC5nKBnzyBXJea"), 35: "assets/img/sports-racing.jpg", 36: "assets/img/screen-casino.jpg", 37: G("mi6DsSSNKDbUY"),
     38: "assets/img/royal-flush.jpg", 40: G("3ov9jUCYetT3GVwcy4"), 41: G("4ZFWCCSVg8K3RV89xW"), 42: G("VQXzKQKI9yvbrjrKZ1"),
     43: G("13I3peucbA8BfG"), 44: G("OE9hKAfUkurx44b5cE"), 45: G("TiDqYW1SQiA38RgoyY"), 46: G("PqjTdvXImZQfcmTYEO"),
@@ -50,8 +51,13 @@ js = rep(js,
     1, "swipe")
 
 # haptik: bolum degisiminde (index.html'deki window.__ggHaptic), overlay titresimi kapali
-js = rep(js, "let n=Math.max(0,Math.min(52,e));if(n===t)return t;",
-          "let n=Math.max(0,Math.min(52,e));if(n===t)return t;try{window.__ggHaptic&&window.__ggHaptic(t,n)}catch(_){}", 1, "haptic hook")
+# DIKKAT: "old" dizesi "new"nin bir ON-EKI oldugu icin eski rep() idempotent degildi;
+# her calistirmada bir try/catch DAHA ekleniyordu (16 kez calistirilmis, 17 kopya birikmisti -> temizlendi).
+if "window.__ggHaptic&&window.__ggHaptic(t,n)" not in js:
+    js = rep(js, "let n=Math.max(0,Math.min(52,e));if(n===t)return t;",
+              "let n=Math.max(0,Math.min(52,e));if(n===t)return t;try{window.__ggHaptic&&window.__ggHaptic(t,n)}catch(_){}", 1, "haptic hook")
+else:
+    print("already applied: haptic hook")
 # geçiş sahnesi (overlay) başlarken titreşim: kısa-kısa-uzun
 # overlay titreşimi bundle içinden güvenilir tetiklenmiyor; index.html'deki MutationObserver .gg-overlay eklenince titreştirir
 for old in ("function ye(){`vibrate`in navigator&&navigator.vibrate([60,40,60,40,140,60,260])}", "function ye(){try{`vibrate`in navigator&&navigator.vibrate([45,60,45,60,220])}catch(_){}}"):
@@ -97,7 +103,7 @@ else:
     print("already applied: roulette video")
 js = rep(js, "(0,x.jsxDEV)(`div`,{className:`gg-ball absolute left-1/2 top-1/2 h-0 w-0`,children:(0,x.jsxDEV)(`i`,{className:`absolute -left-2 -top-2 h-4 w-4 rounded-full bg-white shadow-[0_0_8px_#fff]`},void 0,!1,{fileName:E,lineNumber:24,columnNumber:68},this)},void 0,!1,{fileName:E,lineNumber:24,columnNumber:9},this),",
           "", 1, "roulette ball") if "gg-ball absolute" in js else js
-js = rep(js, "gg-wheel-drop relative h-[260px] w-[260px]", "gg-wheel-drop relative h-[min(72vw,330px)] w-[min(72vw,330px)]", 1, "wheel size")
+js = rep(js, "gg-wheel-drop relative h-[260px] w-[260px]", "gg-wheel-drop relative h-[min(82vw,400px)] w-[min(82vw,400px)]", 1, "wheel size 260->82vw") if "gg-wheel-drop relative h-[260px]" in js else rep(js, "gg-wheel-drop relative h-[min(72vw,330px)] w-[min(72vw,330px)]", "gg-wheel-drop relative h-[min(82vw,400px)] w-[min(82vw,400px)]", 1, "wheel size 72vw->82vw") if "gg-wheel-drop relative h-[min(72vw,330px)]" in js else js
 # rulet videosuna poster: klip daha yüklenmeden ilk kare görünsün
 js = rep(js, "src:`assets/video/roulette-real.mp4`,autoPlay:!0", "src:`assets/video/roulette-real.mp4`,poster:`assets/video/roulette-poster.jpg`,autoPlay:!0", 1, "roulette poster")
 

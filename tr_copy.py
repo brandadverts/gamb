@@ -86,6 +86,6 @@ UI_TR = [
     ("`Previous card`", "`Önceki kart`", 1), ("`Next card`", "`Sonraki kart`", 1),
     ("\"aria-label\":`Suits`", "\"aria-label\":`Bölümler`", 2), ("\"aria-label\":`Cover`", "\"aria-label\":`Kapak`", 1),
     ("`Need to talk to someone who gets it?`", "`Bu işi bilen biriyle konuşalım mı?`", 1), ("`Contact us`", "`İletişime geç`", 1),
-    ("`FREE GAMES START`", "`BEDAVA OYUNLAR BAŞLIYOR`", 1), ("`Running count`", "`Sayım`", 1),
+    ("`FREE SPINS UNLOCKED`", "`BEDAVA DÖNÜŞLER AÇILDI`", 1), ("`Running count`", "`Sayım`", 1),
     ("children:`High Noon`", "children:`Düello Vakti`", 1),
 ]

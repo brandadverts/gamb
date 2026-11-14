@@ -78,7 +78,7 @@
       window.__ggFit=function(){
         var S='.z-\\[1\\].flex-col.overflow-hidden',C='.z-10.h-full.w-full.flex-col.items-center.px-\\[15px\\]';
         document.querySelectorAll(S).forEach(function(b){var s=1;b.style.setProperty('--gg-fit','1');
-          for(var i=0;i<9&&b.scrollHeight>b.clientHeight+1;i++){s=Math.round((s-0.04)*100)/100;b.style.setProperty('--gg-fit',String(s));}});
+          for(var i=0;i<16&&b.scrollHeight>b.clientHeight+1;i++){s=Math.round((s-0.04)*100)/100;b.style.setProperty('--gg-fit',String(s));}});
         document.querySelectorAll(C).forEach(function(c){var s=1;c.style.setProperty('--gg-cfit','1');
           var over=function(){var cs=getComputedStyle(c),avail=c.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),need=0,k=c.children;
             for(var i=0;i<k.length;i++){var el=k[i],ks=getComputedStyle(el),h=el.offsetHeight;
