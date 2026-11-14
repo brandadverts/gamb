@@ -219,3 +219,13 @@ p.text-\[clamp\(13px\,2\.4vh\,16px\)\]{line-height:1.3!important}
 @keyframes ggNeonHue{to{filter:hue-rotate(360deg)}}
 @keyframes ggNeonFlicker{0%,92%,100%{opacity:1}93%{opacity:.5}95%{opacity:1}97.5%{opacity:.65}}
 @media (prefers-reduced-motion:reduce){.gg-neon{clip-path:none;animation:none}}
+
+/* --- Pass 18: ORAN-ORANTI KURALLARI (altin oran). Tipografi √φ=1.272 moduler olcek: 12 → 15.3 → 19.4 → 24.7 → 31.4 → 40 px (eyebrow → madde → aciklama → · → · → baslik). Bosluklar Fibonacci: 8 / 13 / 21 / 34. Gorsel seridi altin kesit %38.2 (metin %61.8), capraz kesim %38. Satir yukseklikleri: baslik 1.08, aciklama 1.5, madde 1.35. Tasma olursa __ggFit olcegi korur (oranlar sabit kalir). --- */
+.z-\[1\].flex-col.overflow-hidden{--gg-h2:clamp(26px,5.4vh,40px);--gg-p:clamp(15px,2.8vh,19.4px);--gg-li:clamp(13.5px,2.2vh,15.3px);--gg-sp:21px;--gg-ul:13px}
+@media (max-height:720px){.z-\[1\].flex-col.overflow-hidden{--gg-h2:clamp(24px,4.9vh,36px);--gg-p:clamp(14px,2.5vh,18px);--gg-li:clamp(13px,2.05vh,15.3px);--gg-sp:13px}}
+@media (max-height:650px){.z-\[1\].flex-col.overflow-hidden{--gg-h2:clamp(22px,4.5vh,31.4px);--gg-p:clamp(13px,2.3vh,16px);--gg-li:clamp(12.5px,1.95vh,14.5px);--gg-sp:8px;--gg-ul:8px}}
+.z-\[1\].flex-col.overflow-hidden>p.mt-3{line-height:1.5!important;margin-top:calc(13px * var(--gg-fit))!important}
+.z-\[1\].flex-col.overflow-hidden li{line-height:1.35!important}
+.z-\[1\].flex-col.overflow-hidden>ul{row-gap:8px}
+.flex-\[0_1_27\%\]{flex:0 999 38.2%!important}
+.gg-neon{overflow-wrap:normal;word-break:keep-all}

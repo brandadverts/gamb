@@ -45,6 +45,7 @@ Açık: masaüstünde 3–4 kart yan yana (Make tasarımı tek kart + arkada iki
 - Her iki video `index.html`'de gizli `<video preload="auto">` ile önceden yüklenir.
 
 ## Kurallar
+- ORAN-ORANTI (altın oran, CSS Pass 18): kart tipografisi √φ=1.272 modüler ölçek (12 eyebrow → 15.3 madde → 19.4 açıklama → 40 başlık); boşluklar Fibonacci 8/13/21/34 px; görsel şeridi altın kesit %38.2 (metin %61.8), çapraz kesim %38; satır yükseklikleri başlık 1.08 / açıklama 1.5 / madde 1.35. Yeni metin veya boyut eklerken bu ölçekten seç; taşmayı `__ggFit` orantıyı bozmadan küçülterek çözer, neon etiket `__ggFxDecor` içinde ekrana sığdırılır.
 - Ünlü/film/dizi klipleri ve rakip kumarhane markalı GIF'ler kullanılmaz; Giphy'den illüstrasyon/soyut klipler, `giphy.mp4` varyantı.
 - Varlık ve ona referans veren kod AYNI commit'te.
 - Commit mesajları Türkçe, `git push origin main` ile yayın.

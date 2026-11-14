@@ -118,7 +118,9 @@
             ctx.globalAlpha=1;raf=requestAnimationFrame(tick)};
           raf=requestAnimationFrame(tick);
         }
-        if(cap){var el=document.createElement('div');el.className='gg-neon';el.setAttribute('aria-hidden','true');el.setAttribute('data-text',cap);el.textContent=cap;node.appendChild(el);}
+        if(cap){var el=document.createElement('div');el.className='gg-neon';el.setAttribute('aria-hidden','true');el.setAttribute('data-text',cap);el.textContent=cap;node.appendChild(el);
+          // ekrana sigdir: tek kelime genisligi veya iki satir yuksekligi tasarsa yaziyi kucult
+          var fs=parseFloat(getComputedStyle(el).fontSize),g=0;while(g++<12&&(el.scrollWidth>el.clientWidth+1||el.getBoundingClientRect().height>innerHeight*.62)&&fs>30){fs=Math.round(fs*.92);el.style.fontSize=fs+'px';}}
       };
       var kick=function(v){v.muted=true;v.playsInline=true;var p=function(){v.play().catch(function(){})};v.readyState>=2?p():v.addEventListener('loadeddata',p,{once:true});};
       document.addEventListener('visibilitychange',function(){if(!document.hidden){document.querySelectorAll('video').forEach(kick)}});
