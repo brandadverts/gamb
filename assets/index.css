@@ -187,3 +187,35 @@ p.text-\[clamp\(13px\,2\.4vh\,16px\)\]{line-height:1.3!important}
 .z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .text-\[clamp\(13px\,2\.4vh\,16px\)\]{font-size:calc(clamp(12px,2.1vh,15px) * var(--gg-cfit))!important}
 .z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .text-\[clamp\(12px\,2\.2vh\,16px\)\]{font-size:calc(clamp(12px,2.2vh,16px) * var(--gg-cfit))!important}
 .z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .py-\[clamp\(6px\,1\.3vh\,10px\)\]{padding-top:calc(clamp(6px,1.3vh,10px) * var(--gg-cfit))!important;padding-bottom:calc(clamp(6px,1.3vh,10px) * var(--gg-cfit))!important}
+
+/* --- Pass 16: gorsel seridi belirgin capraz kesim (bir kenar %38 egik) + kesim boyunca ince altin cizgi; yesil ust etiket (eyebrow) metin blogunun sag ustunde dikey (writing-mode: vertical-rl, yukaridan asagi) --- */
+.gg-cut-top{clip-path:polygon(0 0,100% 0,100% 62%,0 100%)}
+.gg-cut-bottom{clip-path:polygon(0 38%,100% 0,100% 100%,0 100%)}
+.gg-cut-top::after,.gg-cut-bottom::after{content:'';position:absolute;inset:0;z-index:4;pointer-events:none;background:#C8A94A;opacity:.85}
+.gg-cut-bottom::after{clip-path:polygon(0 38%,100% 0,100% 2px,0 calc(38% + 2px))}
+.gg-cut-top::after{clip-path:polygon(0 100%,100% 62%,100% calc(62% - 2px),0 calc(100% - 2px))}
+.z-\[1\].flex-col.overflow-hidden{padding-right:44px!important}
+.z-\[1\].flex-col.overflow-hidden>p.font-elite.uppercase{position:absolute;top:22px;right:17px;margin:0;writing-mode:vertical-rl;text-orientation:mixed;white-space:nowrap;line-height:1;letter-spacing:.2em;max-height:calc(100% - 44px);overflow:hidden}
+.z-\[1\].flex-col.overflow-hidden>h2{margin-top:0!important}
+
+/* --- Pass 17: gecis efektleri. Kart sayma: 6 kart 3+3 iki sira (telefonda tasiyordu); royal flush: 3 ustte 2 altta; neon el yazisi kategori etiketi (.gg-neon, index.html __ggFxDecor) + havai fisek kanvasi (.gg-fw) --- */
+.gg-overlay .flex.flex-col.items-center.gap-6>.flex.gap-2{flex-wrap:wrap;justify-content:center;width:248px;max-width:248px;row-gap:10px}
+.gg-flush{height:340px!important}
+.gg-fcard:nth-child(1){--k:-1!important;--ty:-88px}
+.gg-fcard:nth-child(2){--k:0!important;--ty:-88px}
+.gg-fcard:nth-child(3){--k:1!important;--ty:-88px}
+.gg-fcard:nth-child(4){--k:-.5!important;--ty:88px}
+.gg-fcard:nth-child(5){--k:.5!important;--ty:88px}
+@keyframes ggdealin{to{opacity:1;transform:translate(calc(var(--k) * 104px),var(--ty,0px)) rotate(calc(var(--k) * 6deg))}}
+.gg-fw{position:absolute;inset:0;z-index:0;pointer-events:none}
+.gg-flush{animation-duration:2.9s!important}
+.gg-neon{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:5;text-align:center;font-family:'Pacifico','Brush Script MT',cursive;font-size:clamp(58px,17vw,180px);line-height:1.08;color:#fff;padding:.1em 4vw;pointer-events:none;
+  --n1:#ff2d95;--n2:#ffb830;
+  text-shadow:0 0 4px #fff,0 0 10px #fff,0 0 22px var(--n1),0 0 46px var(--n1),0 0 90px var(--n1),0 0 150px var(--n2);
+  clip-path:inset(-30% 100% -30% 0);
+  animation:ggNeonWrite 1.15s cubic-bezier(.3,.7,.3,1) .45s forwards,ggNeonHue 5s linear .45s infinite,ggNeonFlicker 2.6s steps(1) 1.8s infinite}
+.gg-neon::before{content:attr(data-text);position:absolute;left:0;right:0;top:0;padding:inherit;color:var(--n1);filter:blur(18px);opacity:.8;z-index:-1}
+@keyframes ggNeonWrite{to{clip-path:inset(-30% -3% -30% 0)}}
+@keyframes ggNeonHue{to{filter:hue-rotate(360deg)}}
+@keyframes ggNeonFlicker{0%,92%,100%{opacity:1}93%{opacity:.5}95%{opacity:1}97.5%{opacity:.65}}
+@media (prefers-reduced-motion:reduce){.gg-neon{clip-path:none;animation:none}}
