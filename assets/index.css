@@ -157,19 +157,33 @@ p.text-\[clamp\(13px\,2\.4vh\,16px\)\]{line-height:1.3!important}
 .tracking-\[0\.14em\]{--tw-tracking:.07em;letter-spacing:.07em!important}
 .px-4.py-\[clamp\(5px\,1vh\,8px\)\]{padding-inline:8px!important}
 
-/* --- Pass 14: icerik kartlarinda metin blogu tasiyordu (375x667'de 51 kartin 43'u, 390x844'te 3'u kesik). Metin blogu icerik yuksekligini esas alir, gorsel blogu once kuculur (min 64px); kisa ekranlarda yazi olcegi kademeli dusurulur --- */
+/* --- Pass 14: icerik kartlarinda metin blogu tasiyordu (375x667'de 51 kartin 43'u, 390x844'te 3'u kesik). Metin blogu icerik yuksekligini esas alir, gorsel blogu once kuculur (min 64px) --- */
 .z-\[1\].min-h-0.flex-1.flex-col.overflow-hidden{flex:1 1 auto!important;min-height:0!important}
 .flex-\[0_1_27\%\]{flex:0 999 27%!important}
-@media (max-height:720px){
-  .z-\[1\].flex-col.overflow-hidden>h2{font-size:clamp(24px,4.9vh,36px)!important}
-  .z-\[1\].flex-col.overflow-hidden>p.mt-3{font-size:clamp(14px,2.5vh,18px)!important;line-height:1.45!important}
-  .z-\[1\].flex-col.overflow-hidden li{font-size:clamp(13px,2.05vh,15.5px)!important}
-  .z-\[1\].flex-col.overflow-hidden>.mt-8{margin-top:12px!important}
-}
-@media (max-height:650px){
-  .z-\[1\].flex-col.overflow-hidden>h2{font-size:clamp(22px,4.5vh,32px)!important}
-  .z-\[1\].flex-col.overflow-hidden>p.mt-3{font-size:clamp(13px,2.3vh,16px)!important;line-height:1.4!important}
-  .z-\[1\].flex-col.overflow-hidden li{font-size:clamp(12.5px,1.95vh,14.5px)!important}
-  .z-\[1\].flex-col.overflow-hidden>ul{margin-top:8px!important}
-  .z-\[1\].flex-col.overflow-hidden>.mt-8{margin-top:8px!important}
-}
+
+/* --- Pass 15: yazi olcegi degiskenlerle (kisa ekran kademeleri) + index.html'deki __ggFit otomatik sigdirma (--gg-fit / --gg-cfit; tasma varsa 0.04 adimlarla kuculur). Masaustunde kart ~315x605 sabitken vh tabanli yazilar tasiyordu (1280x800'de 97px'e kadar) --- */
+.z-\[1\].flex-col.overflow-hidden{--gg-fit:1;--gg-h2:clamp(28px,5.4vh,40px);--gg-p:clamp(15px,2.8vh,19px);--gg-li:clamp(14px,2.3vh,16.5px);--gg-sp:32px;--gg-ul:12px}
+@media (max-height:720px){.z-\[1\].flex-col.overflow-hidden{--gg-h2:clamp(24px,4.9vh,36px);--gg-p:clamp(14px,2.5vh,18px);--gg-li:clamp(13px,2.05vh,15.5px);--gg-sp:12px}}
+@media (max-height:650px){.z-\[1\].flex-col.overflow-hidden{--gg-h2:clamp(22px,4.5vh,32px);--gg-p:clamp(13px,2.3vh,16px);--gg-li:clamp(12.5px,1.95vh,14.5px);--gg-sp:8px;--gg-ul:8px}}
+.z-\[1\].flex-col.overflow-hidden>h2{font-size:calc(var(--gg-h2) * var(--gg-fit))!important;margin-top:calc(8px * var(--gg-fit))!important}
+.z-\[1\].flex-col.overflow-hidden>p.mt-3{font-size:calc(var(--gg-p) * var(--gg-fit))!important;line-height:1.45!important;margin-top:calc(12px * var(--gg-fit))!important}
+.z-\[1\].flex-col.overflow-hidden li{font-size:calc(var(--gg-li) * var(--gg-fit))!important}
+.z-\[1\].flex-col.overflow-hidden>ul{margin-top:calc(var(--gg-ul) * var(--gg-fit))!important}
+.z-\[1\].flex-col.overflow-hidden>.mt-8{margin-top:calc(var(--gg-sp) * var(--gg-fit))!important}
+/* kapak sutunu: ayni mantik, --gg-cfit */
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\]{--gg-cfit:1}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .text-\[clamp\(37px\,7\.1vh\,51px\)\]{font-size:calc(clamp(34px,6.4vh,50px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .h-\[clamp\(74px\,14vh\,106px\)\]{height:calc(clamp(50px,9.5vh,92px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .w-\[clamp\(74px\,14vh\,106px\)\]{width:calc(clamp(50px,9.5vh,92px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .mt-\[clamp\(12px\,2\.4vh\,20px\)\]{margin-top:calc(clamp(12px,2.4vh,20px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .py-\[clamp\(9px\,2vh\,15px\)\]{padding-top:calc(clamp(9px,2vh,15px) * var(--gg-cfit))!important;padding-bottom:calc(clamp(9px,2vh,15px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .mt-\[clamp\(10px\,2\.2vh\,18px\)\]{margin-top:calc(clamp(6px,1.4vh,14px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .mt-\[clamp\(10px\,2\.3vh\,18px\)\]{margin-top:calc(clamp(6px,1.4vh,14px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .mt-\[clamp\(9px\,1\.8vh\,14px\)\]{margin-top:calc(clamp(5px,1.1vh,12px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .mt-\[clamp\(9px\,1\.8vh\,15px\)\]{margin-top:calc(clamp(5px,1.1vh,12px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .text-\[clamp\(11px\,1\.8vh\,13px\)\]{font-size:calc(clamp(11px,1.8vh,13px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .text-\[clamp\(15px\,2\.6vh\,19px\)\]{font-size:calc(clamp(15px,2.6vh,19px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .py-\[clamp\(5px\,1vh\,8px\)\]{padding-top:calc(clamp(5px,1vh,8px) * var(--gg-cfit))!important;padding-bottom:calc(clamp(5px,1vh,8px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .text-\[clamp\(13px\,2\.4vh\,16px\)\]{font-size:calc(clamp(12px,2.1vh,15px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .text-\[clamp\(12px\,2\.2vh\,16px\)\]{font-size:calc(clamp(12px,2.2vh,16px) * var(--gg-cfit))!important}
+.z-10.h-full.w-full.flex-col.items-center.px-\[15px\] .py-\[clamp\(6px\,1\.3vh\,10px\)\]{padding-top:calc(clamp(6px,1.3vh,10px) * var(--gg-cfit))!important;padding-bottom:calc(clamp(6px,1.3vh,10px) * var(--gg-cfit))!important}

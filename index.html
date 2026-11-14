@@ -73,11 +73,27 @@
         var now=Date.now();if(now-lastH<400)return;
         if(sec(a)!==sec(b)&&'vibrate'in navigator){lastH=now;try{navigator.vibrate([40,50,40,50,180])}catch(e){}}
       };
+      // Otomatik sigdirma: icerik karti metin blogu (--gg-fit) ve kapak sutunu (--gg-cfit) tasiyorsa yaziyi 0.04 adimlarla kucult (CSS Pass 15)
+      window.__ggFit=function(){
+        var S='.z-\\[1\\].flex-col.overflow-hidden',C='.z-10.h-full.w-full.flex-col.items-center.px-\\[15px\\]';
+        document.querySelectorAll(S).forEach(function(b){var s=1;b.style.setProperty('--gg-fit','1');
+          for(var i=0;i<9&&b.scrollHeight>b.clientHeight+1;i++){s=Math.round((s-0.04)*100)/100;b.style.setProperty('--gg-fit',String(s));}});
+        document.querySelectorAll(C).forEach(function(c){var s=1;c.style.setProperty('--gg-cfit','1');
+          var over=function(){var cs=getComputedStyle(c),avail=c.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),need=0,k=c.children;
+            for(var i=0;i<k.length;i++){var el=k[i],ks=getComputedStyle(el),h=el.offsetHeight;
+              if(parseFloat(ks.flexGrow)>0){var p=el.querySelector('p');h=(p?p.offsetHeight:0)+parseFloat(ks.paddingTop)+parseFloat(ks.paddingBottom);}
+              need+=h+parseFloat(ks.marginTop)+parseFloat(ks.marginBottom);}
+            return need-avail;};
+          for(var i=0;i<9&&over()>1;i++){s=Math.round((s-0.04)*100)/100;c.style.setProperty('--gg-cfit',String(s));}});
+      };
+      var fitT=0,ggFitSched=function(){clearTimeout(fitT);fitT=setTimeout(window.__ggFit,50);};
+      window.addEventListener('resize',ggFitSched);
+      if(document.fonts&&document.fonts.ready)document.fonts.ready.then(ggFitSched);
       var kick=function(v){v.muted=true;v.playsInline=true;var p=function(){v.play().catch(function(){})};v.readyState>=2?p():v.addEventListener('loadeddata',p,{once:true});};
       document.addEventListener('visibilitychange',function(){if(!document.hidden){document.querySelectorAll('video').forEach(kick)}});
       new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;if(n.tagName==='VIDEO')kick(n);else if(n.querySelectorAll)n.querySelectorAll('video').forEach(kick);
         if(n.classList&&n.classList.contains('gg-fx-matrix'))window.__ggMatrix(n);else if(n.querySelectorAll)n.querySelectorAll('canvas.gg-fx-matrix').forEach(window.__ggMatrix);
-        if(n.classList&&n.classList.contains('gg-overlay')){var t=Date.now();if(t-lastH>500&&'vibrate'in navigator){lastH=t;try{navigator.vibrate([45,60,45,60,220])}catch(e){}}}});});}).observe(document.documentElement,{childList:true,subtree:true});
+        if(n.classList&&n.classList.contains('gg-overlay')){var t=Date.now();if(t-lastH>500&&'vibrate'in navigator){lastH=t;try{navigator.vibrate([45,60,45,60,220])}catch(e){}}}});});ggFitSched();}).observe(document.documentElement,{childList:true,subtree:true});
       document.addEventListener('DOMContentLoaded',function(){
         var lg=document.getElementById('ggLogo');
         lg&&lg.addEventListener('click',function(ev){ev.preventDefault();var b=document.querySelector('button[aria-label="Cover"],button[aria-label="Kapak"]');b?b.click():location.reload();});
